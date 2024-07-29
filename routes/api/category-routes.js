@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
       include: [Product]
     })
 
-    res.status().json(categoryData);
+    res.json(categoryData);
   } catch(err) {
     res.status(500).json(err);
   }
@@ -26,7 +26,7 @@ router.get('/:id', async (req, res) => {
       { include: [Product] }
     )
 
-    res.status().json(categoryData);
+    res.json(categoryData);
   } catch(err) {
     res.status(400).json(err);
   }
@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
   // create a new category
   try {
     const categoryData = await Category.create(req.body);
-    res.status().json(categoryData);
+    res.json(categoryData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -52,7 +52,7 @@ router.put('/:id', async (req, res) => {
       }
     )
 
-    res.status().json(categoryData);
+    res.json(categoryData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -70,7 +70,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status().json(categoryData);
+    res.json(categoryData);
   } catch(err) {
     res.status(400).json(err);
   }

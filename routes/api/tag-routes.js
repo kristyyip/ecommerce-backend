@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
       ]
     })
 
-    res.status().json(tagData);
+    res.json(tagData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -25,17 +25,17 @@ router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
   try {
-    const tagData = await Tag.findbyPk(
-      req.params.id,
+    const tagData = await Tag.findOne(
       {
-        include: [ {
-            model: Product,
-            through: ProductTag,
-        } ]
+        where: {id: req.params.id},
+        include: [{
+          model: Product,
+          through: ProductTag,
+        }]
       }
     )
 
-    res.status().json(tagData);
+    res.json(tagData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
   // create a new tag
   try {
     const tagData = await Tag.create(req.body);
-    res.status().json(tagData);
+    res.json(tagData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res) => {
       }
     );
 
-    res.status().json(tagData);
+    res.json(tagData);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -80,7 +80,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status().json(tagData);
+    res.json(tagData);
   } catch (err) {
     res.status(400).json(err);
   }
